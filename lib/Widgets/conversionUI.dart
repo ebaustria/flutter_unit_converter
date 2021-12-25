@@ -6,7 +6,6 @@ class ConversionUI extends StatefulWidget {
   ConversionUI({Key? key, required this.units}) : super(key: key);
 
   final List<Object> units;
-  // final List<TEMPERATURE> temps = [TEMPERATURE.fahrenheit, TEMPERATURE.celsius];
 
   @override
   _ConversionUIState createState() => _ConversionUIState();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Screens/volumeScreen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../Screens/lengthScreen.dart';
@@ -21,7 +22,7 @@ class _NavBarState extends State<NavBar> {
     TemperatureScreen(title: 'Temperature',),
     LengthScreen(title: 'Length & Distance'),
     MassScreen(title: 'Mass'),
-    // VolumeScreen(title: 'Volume'),
+    VolumeScreen(title: 'Volume'),
   ];
 
   @override
@@ -37,7 +38,6 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    // _handleLocationPermission();
 
     // chosen tab will be displayed here
     return Scaffold(
@@ -50,14 +50,22 @@ class _NavBarState extends State<NavBar> {
               BottomNavigationBarItem(
                 icon: Icon(MdiIcons.thermometer),
                 label: 'Temperature',
+                backgroundColor: Theme.of(context).colorScheme.primary,
               ),
               BottomNavigationBarItem(
                 icon: Icon(MdiIcons.ruler),
                 label: 'Length',
+                backgroundColor: Theme.of(context).colorScheme.primary,
               ),
               BottomNavigationBarItem(
                 icon: Icon(MdiIcons.scale),
                 label: 'Mass',
+                backgroundColor: Theme.of(context).colorScheme.primary,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MdiIcons.cupWater),
+                label: 'Volume',
+                backgroundColor: Theme.of(context).colorScheme.primary,
               ),
             ],
             currentIndex: _selectedIndex,

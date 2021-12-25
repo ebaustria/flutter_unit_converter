@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:units_converter/properties/mass.dart';
-import 'package:units_converter/properties/temperature.dart';
 
 import '../Widgets/conversionUI.dart';
 
