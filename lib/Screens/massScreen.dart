@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:units_converter/properties/mass.dart';
 
-import '../Widgets/conversionUI.dart';
+import '../Widgets/conversionForm.dart';
 
 class MassScreen extends StatefulWidget {
   MassScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  final List<MASS> temps = [
+  final List<MASS> massUnits = [
     MASS.ounces,
     MASS.pounds,
     MASS.tons,
@@ -22,10 +22,29 @@ class MassScreen extends StatefulWidget {
 }
 
 class _MassScreenState extends State<MassScreen> {
+  late MASS fromMass;
+  late MASS toMass;
+  double amount = 0;
+
+  void setFromMass(Object? newMass) {
+    fromMass = newMass as MASS;
+  }
+
+  void setToMass(Object? newMass) {
+    toMass = newMass as MASS;
+  }
+
+  void handleAmountChange(String? newAmount) {
+    setState(() {
+      amount = double.parse(newAmount!);
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    fromMass = widget.massUnits.first;
+    toMass = widget.massUnits[1];
   }
 
   @override
@@ -33,7 +52,12 @@ class _MassScreenState extends State<MassScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: ConversionUI(units: widget.temps),
+      body: ConversionForm(
+        units: widget.massUnits,
+        getFromUnit: setFromMass,
+        getToUnit: setToMass,
+        onTextChanged: handleAmountChange,
+      ),
     );
   }
 }

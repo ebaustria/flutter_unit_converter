@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_unit_converter/Widgets/dropdownMenu.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class ConversionUI extends StatefulWidget {
-  ConversionUI({Key? key, required this.units}) : super(key: key);
+class ConversionForm extends StatefulWidget {
+  ConversionForm({
+    Key? key,
+    required this.units,
+    required this.getFromUnit,
+    required this.getToUnit,
+    required this.onTextChanged,
+  }) : super(key: key);
 
   final List<Object> units;
+  final Function(Object?) getFromUnit;
+  final Function(Object?) getToUnit;
+  final Function(String?) onTextChanged;
 
   @override
-  _ConversionUIState createState() => _ConversionUIState();
+  _ConversionFormState createState() => _ConversionFormState();
 }
 
-class _ConversionUIState extends State<ConversionUI> {
+class _ConversionFormState extends State<ConversionForm> {
   final GlobalKey<DropdownMenuState> _fromMenuState = GlobalKey<DropdownMenuState>();
   final GlobalKey<DropdownMenuState> _toMenuState = GlobalKey<DropdownMenuState>();
   late DropdownMenu from;
@@ -20,15 +29,25 @@ class _ConversionUIState extends State<ConversionUI> {
   void swapUnits() {
     Object? toUnit = _toMenuState.currentState?.selectedUnit;
     Object? fromUnit = _fromMenuState.currentState?.selectedUnit;
-    _fromMenuState.currentState?.swapUnits(toUnit);
-    _toMenuState.currentState?.swapUnits(fromUnit);
+    _fromMenuState.currentState?.onUnitChanged(toUnit);
+    _toMenuState.currentState?.onUnitChanged(fromUnit);
   }
 
   @override
   void initState() {
     super.initState();
-    from = DropdownMenu(key: _fromMenuState, units: widget.units);
-    to = DropdownMenu(key: _toMenuState, units: widget.units);
+    from = DropdownMenu(
+      key: _fromMenuState,
+      units: widget.units,
+      getUnit: widget.getFromUnit,
+      initialUnit: widget.units.first,
+    );
+    to = DropdownMenu(
+      key: _toMenuState,
+      units: widget.units,
+      getUnit: widget.getToUnit,
+      initialUnit: widget.units[1],
+    );
   }
 
   @override
@@ -48,6 +67,7 @@ class _ConversionUIState extends State<ConversionUI> {
                 Expanded(
                   child: TextField(
                     keyboardType: TextInputType.number,
+                    onChanged: widget.onTextChanged,
                   ),
                 ),
                 from,

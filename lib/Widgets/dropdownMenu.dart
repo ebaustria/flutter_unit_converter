@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class DropdownMenu extends StatefulWidget {
-  DropdownMenu({required Key key, required this.units}) : super(key: key);
+  DropdownMenu({
+    required Key key,
+    required this.units,
+    required this.getUnit,
+    required this.initialUnit,
+  }) : super(key: key);
 
   final List<Object> units;
+  final Function(Object?) getUnit;
+  final Object initialUnit;
 
   @override
   DropdownMenuState createState() => DropdownMenuState();
@@ -12,7 +19,8 @@ class DropdownMenu extends StatefulWidget {
 class DropdownMenuState extends State<DropdownMenu> {
   Object? selectedUnit;
 
-  void swapUnits(Object? newUnit) {
+  void onUnitChanged(Object? newUnit) {
+    widget.getUnit(newUnit);
     setState(() {
       selectedUnit = newUnit;
     });
@@ -21,7 +29,7 @@ class DropdownMenuState extends State<DropdownMenu> {
   @override
   void initState() {
     super.initState();
-    selectedUnit = widget.units.first;
+    selectedUnit = widget.initialUnit;
   }
 
   @override
@@ -29,11 +37,7 @@ class DropdownMenuState extends State<DropdownMenu> {
 
     return DropdownButton(
       value: selectedUnit,
-      onChanged: (Object? value) {
-        setState(() {
-          selectedUnit = value;
-        });
-      },
+      onChanged: onUnitChanged,
       items: widget.units
           .map<DropdownMenuItem<Object>>((Object value) {
         return DropdownMenuItem<Object>(
