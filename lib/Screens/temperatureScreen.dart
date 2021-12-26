@@ -43,11 +43,18 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   }
 
   void handleConversion() {
+    if (fromTemp == toTemp) {
+      print(amount);
+      return;
+    }
+
     var temp = Temperature()..convert(fromTemp, amount);
+
     if (fromTemp == TEMPERATURE.fahrenheit) {
       print(temp.celsius.value);
       return;
     }
+
     print(temp.fahrenheit.value);
   }
 

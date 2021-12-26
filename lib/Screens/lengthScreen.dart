@@ -48,6 +48,52 @@ class _LengthScreenState extends State<LengthScreen> {
     });
   }
 
+  void handleConversion() {
+    if (fromLength == toLength) {
+      print(amount);
+      return;
+    }
+    var length = Length()..convert(fromLength, amount);
+    switch(toLength) {
+      case LENGTH.inches: {
+        print(length.inches.value);
+      }
+      break;
+      case LENGTH.feet: {
+        print(length.feet.value);
+      }
+      break;
+      case LENGTH.yards: {
+        print(length.yards.value);
+      }
+      break;
+      case LENGTH.miles: {
+        print(length.miles.value);
+      }
+      break;
+      case LENGTH.micrometers: {
+        print(length.micrometers.value);
+      }
+      break;
+      case LENGTH.millimeters: {
+        print(length.millimeters.value);
+      }
+      break;
+      case LENGTH.centimeters: {
+        print(length.centimeters.value);
+      }
+      break;
+      case LENGTH.meters: {
+        print(length.meters.value);
+      }
+      break;
+      default: {
+        print(length.kilometers.value);
+      }
+      break;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -60,11 +106,16 @@ class _LengthScreenState extends State<LengthScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: ConversionForm(
-        units: widget.lengths,
-        getFromUnit: setFromLength,
-        getToUnit: setToLength,
-        onTextChanged: handleAmountChange,
+      body: Column(
+        children: <Widget>[
+          ConversionForm(
+            units: widget.lengths,
+            getFromUnit: setFromLength,
+            getToUnit: setToLength,
+            onTextChanged: handleAmountChange,
+          ),
+          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+        ],
       ),
     );
   }
