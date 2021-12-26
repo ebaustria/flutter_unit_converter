@@ -31,8 +31,14 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   }
 
   void handleAmountChange(String? newAmount) {
+    double newDouble;
+    try {
+      newDouble = double.parse(newAmount!);
+    } on FormatException {
+      newDouble = 0;
+    }
     setState(() {
-      amount = double.parse(newAmount!);
+      amount = newDouble;
     });
   }
 

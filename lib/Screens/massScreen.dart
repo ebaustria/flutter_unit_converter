@@ -35,8 +35,14 @@ class _MassScreenState extends State<MassScreen> {
   }
 
   void handleAmountChange(String? newAmount) {
+    double newDouble;
+    try {
+      newDouble = double.parse(newAmount!);
+    } on FormatException {
+      newDouble = 0;
+    }
     setState(() {
-      amount = double.parse(newAmount!);
+      amount = newDouble;
     });
   }
 

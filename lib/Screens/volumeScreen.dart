@@ -34,8 +34,14 @@ class _VolumeScreenState extends State<VolumeScreen> {
   }
 
   void handleAmountChange(String? newAmount) {
+    double newDouble;
+    try {
+      newDouble = double.parse(newAmount!);
+    } on FormatException {
+      newDouble = 0;
+    }
     setState(() {
-      amount = double.parse(newAmount!);
+      amount = newDouble;
     });
   }
 
