@@ -26,7 +26,8 @@ class LengthScreen extends StatefulWidget {
 class _LengthScreenState extends State<LengthScreen> {
   late LENGTH fromLength;
   late LENGTH toLength;
-  double amount = 0;
+  double? amount;
+  String conversionResult = "";
 
   void setFromLength(Object? newLength) {
     fromLength = newLength as LENGTH;
@@ -48,49 +49,64 @@ class _LengthScreenState extends State<LengthScreen> {
     });
   }
 
-  void handleConversion() {
-    if (fromLength == toLength) {
-      print(amount);
-      return;
-    }
+  void findGoalUnit() {
+    String newConversionResult;
     var length = Length()..convert(fromLength, amount);
+
     switch(toLength) {
       case LENGTH.inches: {
-        print(length.inches.value);
+        newConversionResult = length.inches.value.toString();
       }
       break;
       case LENGTH.feet: {
-        print(length.feet.value);
+        newConversionResult = length.feet.value.toString();
       }
       break;
       case LENGTH.yards: {
-        print(length.yards.value);
+        newConversionResult = length.yards.value.toString();
       }
       break;
       case LENGTH.miles: {
-        print(length.miles.value);
+        newConversionResult = length.miles.value.toString();
       }
       break;
       case LENGTH.micrometers: {
-        print(length.micrometers.value);
+        newConversionResult = length.micrometers.value.toString();
       }
       break;
       case LENGTH.millimeters: {
-        print(length.millimeters.value);
+        newConversionResult = length.millimeters.value.toString();
       }
       break;
       case LENGTH.centimeters: {
-        print(length.centimeters.value);
+        newConversionResult = length.centimeters.value.toString();
       }
       break;
       case LENGTH.meters: {
-        print(length.meters.value);
+        newConversionResult = length.meters.value.toString();
       }
       break;
       default: {
-        print(length.kilometers.value);
+        newConversionResult = length.kilometers.value.toString();
       }
       break;
+    }
+    setState(() {
+      conversionResult = newConversionResult;
+    });
+  }
+
+  void handleConversion() {
+    if (amount == null) {
+      setState(() {
+        conversionResult = "";
+      });
+    } else if (fromLength == toLength) {
+      setState(() {
+        conversionResult = amount.toString();
+      });
+    } else {
+      findGoalUnit();
     }
   }
 
@@ -115,6 +131,7 @@ class _LengthScreenState extends State<LengthScreen> {
             onTextChanged: handleAmountChange,
           ),
           ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+          Text(conversionResult, style: TextStyle(fontSize: 32)),
         ],
       ),
     );
