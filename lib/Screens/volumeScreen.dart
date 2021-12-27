@@ -23,7 +23,8 @@ class VolumeScreen extends StatefulWidget {
 class _VolumeScreenState extends State<VolumeScreen> {
   late VOLUME fromVolume;
   late VOLUME toVolume;
-  double amount = 0;
+  double? amount;
+  String conversionResult = "";
 
   void setFromVolume(Object? newVolume) {
     fromVolume = newVolume as VOLUME;
@@ -45,6 +46,55 @@ class _VolumeScreenState extends State<VolumeScreen> {
     });
   }
 
+  void handleConversion() {
+    if (amount == null) {
+      setState(() {
+        conversionResult = "";
+      });
+    } else if (fromVolume == toVolume) {
+      setState(() {
+        conversionResult = amount.toString();
+      });
+    } else {
+      findGoalUnit();
+    }
+  }
+
+  void findGoalUnit() {
+    String newConversionResult;
+    var mass = Volume()..convert(fromVolume, amount);
+
+    switch(toVolume) {
+      case VOLUME.tablespoonsUs: {
+        newConversionResult = mass.tablespoonsUs.value.toString();
+      }
+      break;
+      case VOLUME.cups: {
+        newConversionResult = mass.cups.value.toString();
+      }
+      break;
+      case VOLUME.usPints: {
+        newConversionResult = mass.usPints.value.toString();
+      }
+      break;
+      case VOLUME.usGallons: {
+        newConversionResult = mass.usGallons.value.toString();
+      }
+      break;
+      case VOLUME.milliliters: {
+        newConversionResult = mass.milliliters.value.toString();
+      }
+      break;
+      default: {
+        newConversionResult = mass.liters.value.toString();
+      }
+      break;
+    }
+    setState(() {
+      conversionResult = newConversionResult;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -57,11 +107,17 @@ class _VolumeScreenState extends State<VolumeScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: ConversionForm(
-        units: widget.volumes,
-        getFromUnit: setFromVolume,
-        getToUnit: setToVolume,
-        onTextChanged: handleAmountChange,
+      body: Column(
+        children: <Widget>[
+          ConversionForm(
+            units: widget.volumes,
+            getFromUnit: setFromVolume,
+            getToUnit: setToVolume,
+            onTextChanged: handleAmountChange,
+          ),
+          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+          Text(conversionResult, style: TextStyle(fontSize: 32)),
+        ],
       ),
     );
   }

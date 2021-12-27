@@ -24,7 +24,8 @@ class MassScreen extends StatefulWidget {
 class _MassScreenState extends State<MassScreen> {
   late MASS fromMass;
   late MASS toMass;
-  double amount = 0;
+  double? amount;
+  String conversionResult = "";
 
   void setFromMass(Object? newMass) {
     fromMass = newMass as MASS;
@@ -46,6 +47,59 @@ class _MassScreenState extends State<MassScreen> {
     });
   }
 
+  void handleConversion() {
+    if (amount == null) {
+      setState(() {
+        conversionResult = "";
+      });
+    } else if (fromMass == toMass) {
+      setState(() {
+        conversionResult = amount.toString();
+      });
+    } else {
+      findGoalUnit();
+    }
+  }
+
+  void findGoalUnit() {
+    String newConversionResult;
+    var mass = Mass()..convert(fromMass, amount);
+
+    switch(toMass) {
+      case MASS.ounces: {
+        newConversionResult = mass.ounces.value.toString();
+      }
+      break;
+      case MASS.pounds: {
+        newConversionResult = mass.pounds.value.toString();
+      }
+      break;
+      case MASS.tons: {
+        newConversionResult = mass.tons.value.toString();
+      }
+      break;
+      case MASS.milligrams: {
+        newConversionResult = mass.milligrams.value.toString();
+      }
+      break;
+      case MASS.centigrams: {
+        newConversionResult = mass.centigrams.value.toString();
+      }
+      break;
+      case MASS.grams: {
+        newConversionResult = mass.grams.value.toString();
+      }
+      break;
+      default: {
+        newConversionResult = mass.kilograms.value.toString();
+      }
+      break;
+    }
+    setState(() {
+      conversionResult = newConversionResult;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -58,11 +112,17 @@ class _MassScreenState extends State<MassScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: ConversionForm(
-        units: widget.massUnits,
-        getFromUnit: setFromMass,
-        getToUnit: setToMass,
-        onTextChanged: handleAmountChange,
+      body: Column(
+        children: <Widget>[
+          ConversionForm(
+            units: widget.massUnits,
+            getFromUnit: setFromMass,
+            getToUnit: setToMass,
+            onTextChanged: handleAmountChange,
+          ),
+          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+          Text(conversionResult, style: TextStyle(fontSize: 32)),
+        ],
       ),
     );
   }
