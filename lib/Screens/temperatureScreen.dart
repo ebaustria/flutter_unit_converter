@@ -16,7 +16,7 @@ class TemperatureScreen extends StatefulWidget {
 class _TemperatureScreenState extends State<TemperatureScreen> {
   late TEMPERATURE fromTemp;
   late TEMPERATURE toTemp;
-  double amount = 0;
+  double? amount;
 
   void setFromTemp(Object? newTemp) {
     setState(() {
@@ -42,20 +42,22 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
     });
   }
 
-  void handleConversion() {
+  String handleConversion() {
+    if (amount == null) {
+      return "";
+    }
+
     if (fromTemp == toTemp) {
-      print(amount);
-      return;
+      return amount.toString();
     }
 
     var temp = Temperature()..convert(fromTemp, amount);
 
     if (fromTemp == TEMPERATURE.fahrenheit) {
-      print(temp.celsius.value);
-      return;
+      return temp.celsius.value.toString();
     }
 
-    print(temp.fahrenheit.value);
+    return temp.fahrenheit.value.toString();
   }
 
   @override
@@ -71,15 +73,17 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Column(
-          children: <Widget>[
-            ConversionForm(
-              units: widget.temps,
-              getFromUnit: setFromTemp,
-              getToUnit: setToTemp,
-              onTextChanged: handleAmountChange,
-            ),
-            ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          ]
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          ConversionForm(
+            units: widget.temps,
+            getFromUnit: setFromTemp,
+            getToUnit: setToTemp,
+            onTextChanged: handleAmountChange,
+          ),
+          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+          Text(handleConversion(), style: TextStyle(fontSize: 32)),
+        ]
       ),
     );
   }
