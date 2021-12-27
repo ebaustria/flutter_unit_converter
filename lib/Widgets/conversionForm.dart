@@ -91,7 +91,7 @@ class _ConversionFormState extends State<ConversionForm> {
               flex: 1,
               child: ElevatedButton(
                   onPressed: swapUnits,
-                  child: const Icon(MdiIcons.swapHorizontal)
+                  child: const Icon(MdiIcons.swapVertical)
               ),
             ),
             Spacer(),

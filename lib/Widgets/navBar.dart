@@ -7,9 +7,10 @@ import '../Screens/massScreen.dart';
 import '../Screens/temperatureScreen.dart';
 
 class NavBar extends StatefulWidget {
-  NavBar({Key? key, required this.title}) : super(key: key);
+  NavBar({Key? key, required this.title, required this.onIndexChanged}) : super(key: key);
 
   final String title;
+  final Function(int) onIndexChanged;
 
   @override
   _NavBarState createState() => _NavBarState();
@@ -31,6 +32,7 @@ class _NavBarState extends State<NavBar> {
   }
 
   void _onItemTapped(int value) {
+    widget.onIndexChanged(value);
     setState(() {
       _selectedIndex = value;
     });
