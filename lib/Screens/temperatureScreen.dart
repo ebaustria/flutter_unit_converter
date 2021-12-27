@@ -17,6 +17,7 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   late TEMPERATURE fromTemp;
   late TEMPERATURE toTemp;
   double? amount;
+  String conversionResult = "";
 
   void setFromTemp(Object? newTemp) {
     setState(() {
@@ -42,22 +43,23 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
     });
   }
 
-  String handleConversion() {
-    if (amount == null) {
-      return "";
-    }
-
-    if (fromTemp == toTemp) {
-      return amount.toString();
-    }
-
+  void handleConversion() {
+    String newConversionResult;
     var temp = Temperature()..convert(fromTemp, amount);
 
-    if (fromTemp == TEMPERATURE.fahrenheit) {
-      return temp.celsius.value.toString();
+    if (amount == null) {
+      newConversionResult = "";
+    } else if (fromTemp == toTemp) {
+      newConversionResult = amount.toString();
+    } else if (fromTemp == TEMPERATURE.fahrenheit) {
+      newConversionResult = temp.celsius.value.toString() + " °C";
+    } else {
+      newConversionResult = temp.fahrenheit.value.toString() + " °F";
     }
 
-    return temp.fahrenheit.value.toString();
+    setState(() {
+      conversionResult = newConversionResult;
+    });
   }
 
   @override
@@ -82,7 +84,7 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
             onTextChanged: handleAmountChange,
           ),
           ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          Text(handleConversion(), style: TextStyle(fontSize: 32)),
+          Text(conversionResult, style: TextStyle(fontSize: 32)),
         ]
       ),
     );

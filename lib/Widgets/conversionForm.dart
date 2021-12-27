@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unit_converter/Widgets/dropdownMenu.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -50,40 +51,55 @@ class _ConversionFormState extends State<ConversionForm> {
     );
   }
 
+  Widget buildRow(String text, DropdownMenu dropdown, bool isFrom) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Flexible(child: Text(text, style: TextStyle(fontSize: 18),)),
+        if (isFrom) ...[
+          Flexible(
+            child: TextField(
+              keyboardType: TextInputType.number,
+              onChanged: widget.onTextChanged,
+            ),
+          ),
+        ],
+        Flexible(
+          flex: 2,
+          child: dropdown,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
-      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: Align(
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(child: const Text('From: ')),
-                Expanded(
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    onChanged: widget.onTextChanged,
-                  ),
-                ),
-                from,
-              ],
+            Spacer(),
+            Flexible(
+              flex: 1,
+              child: buildRow('From:  ', from, true),
             ),
-            ElevatedButton(
-                onPressed: swapUnits,
-                child: const Icon(MdiIcons.swapHorizontal)
+            Spacer(),
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                  onPressed: swapUnits,
+                  child: const Icon(MdiIcons.swapHorizontal)
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Expanded(child: const Text('To: ')),
-                to,
-              ],
+            Spacer(),
+            Flexible(
+              flex: 1,
+              child: buildRow('To:  ', to, false),
             ),
+            Spacer(),
           ],
         ),
       ),
