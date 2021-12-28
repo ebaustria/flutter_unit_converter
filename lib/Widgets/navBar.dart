@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Screens/shoeSizeScreen.dart';
 import 'package:flutter_unit_converter/Screens/volumeScreen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -24,6 +25,7 @@ class _NavBarState extends State<NavBar> {
     LengthScreen(title: 'Length & Distance'),
     MassScreen(title: 'Mass'),
     VolumeScreen(title: 'Volume'),
+    ShoeSizeScreen(title: 'Shoe Size'),
   ];
 
   @override
@@ -67,6 +69,11 @@ class _NavBarState extends State<NavBar> {
               BottomNavigationBarItem(
                 icon: Icon(MdiIcons.cupWater),
                 label: 'Volume',
+                backgroundColor: Theme.of(context).colorScheme.primary,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MdiIcons.shoePrint),
+                label: 'Shoes',
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),
             ],

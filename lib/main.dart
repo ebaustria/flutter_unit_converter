@@ -20,6 +20,7 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
     Colors.purple,
     Colors.green,
     Colors.indigo,
+    Colors.pink,
   ];
 
   void setTheme(int selectedIndex) {
