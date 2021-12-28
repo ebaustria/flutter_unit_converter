@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Widgets/resultCard.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/mass.dart';
 
@@ -126,7 +127,7 @@ class _MassScreenState extends State<MassScreen> {
             onTextChanged: handleAmountChange,
           ),
           ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          Text(conversionResult, style: TextStyle(fontSize: 32)),
+          ResultCard(conversionResult: conversionResult),
         ],
       ),
     );

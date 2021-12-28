@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Widgets/resultCard.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/volume.dart';
 
@@ -57,6 +58,8 @@ class _VolumeScreenState extends State<VolumeScreen> {
     }
   }
 
+  double roundDouble(String value) => double.parse((double.parse(value)).toStringAsFixed(6));
+
   void findGoalUnit() {
     String newConversionResult;
     Volume volume = Volume(significantFigures: 8, removeTrailingZeros: true);
@@ -65,32 +68,32 @@ class _VolumeScreenState extends State<VolumeScreen> {
     switch(toVolume) {
       case VOLUME.tablespoonsUs: {
         Unit tbsp = volume.tablespoonsUs;
-        newConversionResult = '${tbsp.stringValue} ${tbsp.symbol}';
+        newConversionResult = '${roundDouble(tbsp.stringValue!)} ${tbsp.symbol}';
       }
       break;
       case VOLUME.cups: {
         Unit cups = volume.cups;
-        newConversionResult = '${cups.stringValue} ${cups.symbol}';
+        newConversionResult = '${roundDouble(cups.stringValue!)} ${cups.symbol}';
       }
       break;
       case VOLUME.usPints: {
         Unit pints = volume.usPints;
-        newConversionResult = '${pints.stringValue} ${pints.symbol}';
+        newConversionResult = '${roundDouble(pints.stringValue!)} ${pints.symbol}';
       }
       break;
       case VOLUME.usGallons: {
         Unit gallons = volume.usGallons;
-        newConversionResult = '${gallons.stringValue} ${gallons.symbol}';
+        newConversionResult = '${roundDouble(gallons.stringValue!)} ${gallons.symbol}';
       }
       break;
       case VOLUME.milliliters: {
         Unit ml = volume.milliliters;
-        newConversionResult = '${ml.stringValue} ${ml.symbol}';
+        newConversionResult = '${roundDouble(ml.stringValue!)} ${ml.symbol}';
       }
       break;
       default: {
         Unit liters = volume.liters;
-        newConversionResult = '${liters.stringValue} ${liters.symbol}';
+        newConversionResult = '${roundDouble(liters.stringValue!)} ${liters.symbol}';
       }
       break;
     }
@@ -120,7 +123,7 @@ class _VolumeScreenState extends State<VolumeScreen> {
             onTextChanged: handleAmountChange,
           ),
           ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          Text(conversionResult, style: TextStyle(fontSize: 32)),
+          ResultCard(conversionResult: conversionResult),
         ],
       ),
     );
