@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/volume.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -51,10 +52,6 @@ class _VolumeScreenState extends State<VolumeScreen> {
       setState(() {
         conversionResult = "";
       });
-    } else if (fromVolume == toVolume) {
-      setState(() {
-        conversionResult = amount.toString();
-      });
     } else {
       findGoalUnit();
     }
@@ -62,31 +59,38 @@ class _VolumeScreenState extends State<VolumeScreen> {
 
   void findGoalUnit() {
     String newConversionResult;
-    var mass = Volume()..convert(fromVolume, amount);
+    Volume volume = Volume(significantFigures: 8, removeTrailingZeros: true);
+    volume.convert(fromVolume, amount);
 
     switch(toVolume) {
       case VOLUME.tablespoonsUs: {
-        newConversionResult = mass.tablespoonsUs.value.toString();
+        Unit tbsp = volume.tablespoonsUs;
+        newConversionResult = '${tbsp.stringValue} ${tbsp.symbol}';
       }
       break;
       case VOLUME.cups: {
-        newConversionResult = mass.cups.value.toString();
+        Unit cups = volume.cups;
+        newConversionResult = '${cups.stringValue} ${cups.symbol}';
       }
       break;
       case VOLUME.usPints: {
-        newConversionResult = mass.usPints.value.toString();
+        Unit pints = volume.usPints;
+        newConversionResult = '${pints.stringValue} ${pints.symbol}';
       }
       break;
       case VOLUME.usGallons: {
-        newConversionResult = mass.usGallons.value.toString();
+        Unit gallons = volume.usGallons;
+        newConversionResult = '${gallons.stringValue} ${gallons.symbol}';
       }
       break;
       case VOLUME.milliliters: {
-        newConversionResult = mass.milliliters.value.toString();
+        Unit ml = volume.milliliters;
+        newConversionResult = '${ml.stringValue} ${ml.symbol}';
       }
       break;
       default: {
-        newConversionResult = mass.liters.value.toString();
+        Unit liters = volume.liters;
+        newConversionResult = '${liters.stringValue} ${liters.symbol}';
       }
       break;
     }

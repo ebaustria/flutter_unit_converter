@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/mass.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -52,10 +53,6 @@ class _MassScreenState extends State<MassScreen> {
       setState(() {
         conversionResult = "";
       });
-    } else if (fromMass == toMass) {
-      setState(() {
-        conversionResult = amount.toString();
-      });
     } else {
       findGoalUnit();
     }
@@ -63,35 +60,43 @@ class _MassScreenState extends State<MassScreen> {
 
   void findGoalUnit() {
     String newConversionResult;
-    var mass = Mass()..convert(fromMass, amount);
+    Mass mass = Mass(significantFigures: 8, removeTrailingZeros: true);
+    mass.convert(fromMass, amount);
 
     switch(toMass) {
       case MASS.ounces: {
-        newConversionResult = mass.ounces.value.toString();
+        Unit oz = mass.ounces;
+        newConversionResult = '${oz.stringValue} ${oz.symbol}';
       }
       break;
       case MASS.pounds: {
-        newConversionResult = mass.pounds.value.toString();
+        Unit lbs = mass.pounds;
+        newConversionResult = '${lbs.stringValue} ${lbs.symbol}';
       }
       break;
       case MASS.tons: {
-        newConversionResult = mass.tons.value.toString();
+        Unit tons = mass.tons;
+        newConversionResult = '${tons.stringValue} ${tons.symbol}';
       }
       break;
       case MASS.milligrams: {
-        newConversionResult = mass.milligrams.value.toString();
+        Unit mg = mass.milligrams;
+        newConversionResult = '${mg.stringValue} ${mg.symbol}';
       }
       break;
       case MASS.centigrams: {
-        newConversionResult = mass.centigrams.value.toString();
+        Unit cg = mass.centigrams;
+        newConversionResult = '${cg.stringValue} ${cg.symbol}';
       }
       break;
       case MASS.grams: {
-        newConversionResult = mass.grams.value.toString();
+        Unit grams = mass.grams;
+        newConversionResult = '${grams.stringValue} ${grams.symbol}';
       }
       break;
       default: {
-        newConversionResult = mass.kilograms.value.toString();
+        Unit kg = mass.kilograms;
+        newConversionResult = '${kg.stringValue} ${kg.symbol}';
       }
       break;
     }

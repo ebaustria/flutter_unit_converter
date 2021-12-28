@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/temperature.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -45,16 +46,17 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
 
   void handleConversion() {
     String newConversionResult;
-    var temp = Temperature()..convert(fromTemp, amount);
+    Temperature temp = Temperature(significantFigures: 8, removeTrailingZeros: true);
+    temp.convert(fromTemp, amount);
 
     if (amount == null) {
       newConversionResult = "";
-    } else if (fromTemp == toTemp) {
-      newConversionResult = amount.toString();
     } else if (fromTemp == TEMPERATURE.fahrenheit) {
-      newConversionResult = temp.celsius.value.toString() + " °C";
+      Unit c = temp.celsius;
+      newConversionResult = '${c.stringValue} ${c.symbol}';
     } else {
-      newConversionResult = temp.fahrenheit.value.toString() + " °F";
+      Unit f = temp.fahrenheit;
+      newConversionResult = '${f.stringValue} ${f.symbol}';
     }
 
     setState(() {
