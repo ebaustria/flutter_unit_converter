@@ -97,7 +97,7 @@ class _ConversionFormState extends State<ConversionForm> {
             Spacer(),
             Flexible(
               flex: 1,
-              child: buildRow('To:  ', to, false),
+              child: buildRow('To:', to, false),
             ),
             Spacer(),
           ],

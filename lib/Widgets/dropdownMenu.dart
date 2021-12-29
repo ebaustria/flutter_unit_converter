@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DropdownMenu extends StatefulWidget {
   DropdownMenu({
@@ -35,16 +36,26 @@ class DropdownMenuState extends State<DropdownMenu> {
   @override
   Widget build(BuildContext context) {
 
-    return DropdownButton(
-      value: selectedUnit,
-      onChanged: onUnitChanged,
-      items: widget.units
-          .map<DropdownMenuItem<Object>>((Object value) {
-        return DropdownMenuItem<Object>(
-          value: value,
-          child: Text(value.toString().split(".").last),
-        );
-      }).toList(),
+    return Container(
+      margin: EdgeInsets.only(left: 10.0),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary)),
+      ),
+      child: DropdownButton(
+        underline: SizedBox.shrink(),
+        value: selectedUnit,
+        onChanged: onUnitChanged,
+        // onTap: onButtonTap,
+        icon: Icon(MdiIcons.chevronDown),
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        items: widget.units
+            .map<DropdownMenuItem<Object>>((Object value) {
+          return DropdownMenuItem<Object>(
+            value: value,
+            child: Text(value.toString().split(".").last),
+          );
+        }).toList(),
+      )
     );
   }
 }

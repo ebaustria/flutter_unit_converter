@@ -12,10 +12,10 @@ class ShoeSizeScreen extends StatefulWidget {
   final ShoeSizeConverter shoeSizeConverter = ShoeSizeConverter();
   final List<SHOE_SIZE> sizes = [
     SHOE_SIZE.usaCanadaChild,
-    SHOE_SIZE.usaCanadaMan,
-    SHOE_SIZE.usaCanadaWoman,
     SHOE_SIZE.ukIndiaChild,
+    SHOE_SIZE.usaCanadaMan,
     SHOE_SIZE.ukIndiaMan,
+    SHOE_SIZE.usaCanadaWoman,
     SHOE_SIZE.ukIndiaWoman,
     SHOE_SIZE.euChina,
   ];
@@ -79,17 +79,17 @@ class _ShoeSizeScreenState extends State<ShoeSizeScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ConversionForm(
-              units: widget.sizes,
-              getFromUnit: setFromSize,
-              getToUnit: setToSize,
-              onTextChanged: handleAmountChange,
-            ),
-            ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-            ResultCard(conversionResult: conversionResult),
-          ]
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          ConversionForm(
+            units: widget.sizes,
+            getFromUnit: setFromSize,
+            getToUnit: setToSize,
+            onTextChanged: handleAmountChange,
+          ),
+          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+          ResultCard(conversionResult: conversionResult),
+        ]
       ),
     );
   }
