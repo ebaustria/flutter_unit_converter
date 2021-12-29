@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Models/shoeSizeConverter.dart';
 import 'package:flutter_unit_converter/Widgets/resultCard.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/shoe_size.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -9,6 +9,7 @@ class ShoeSizeScreen extends StatefulWidget {
   ShoeSizeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  final ShoeSizeConverter shoeSizeConverter = ShoeSizeConverter();
   final List<SHOE_SIZE> sizes = [
     SHOE_SIZE.usaCanadaChild,
     SHOE_SIZE.usaCanadaMan,
@@ -54,56 +55,11 @@ class _ShoeSizeScreenState extends State<ShoeSizeScreen> {
   }
 
   void handleConversion() {
-    if (amount == null) {
-      setState(() {
-        conversionResult = "";
-      });
-    } else {
-      findGoalUnit();
-    }
-  }
-
-  void findGoalUnit() {
     String newConversionResult;
-    ShoeSize size = ShoeSize(significantFigures: 8, removeTrailingZeros: true);
-    size.convert(fromSize, amount);
-
-    switch(toSize) {
-      case SHOE_SIZE.usaCanadaChild: {
-        Unit usChild = size.usaCanadaChild;
-        newConversionResult = '${usChild.stringValue}';
-      }
-      break;
-      case SHOE_SIZE.usaCanadaMan: {
-        Unit usMan = size.usaCanadaMan;
-        newConversionResult = '${usMan.stringValue}';
-      }
-      break;
-      case SHOE_SIZE.usaCanadaWoman: {
-        Unit usWoman = size.usaCanadaWoman;
-        newConversionResult = '${usWoman.stringValue}';
-      }
-      break;
-      case SHOE_SIZE.ukIndiaChild: {
-        Unit ukChild = size.ukIndiaChild;
-        newConversionResult = '${ukChild.stringValue}';
-      }
-      break;
-      case SHOE_SIZE.ukIndiaMan: {
-        Unit ukMan = size.ukIndiaMan;
-        newConversionResult = '${ukMan.stringValue}';
-      }
-      break;
-      case SHOE_SIZE.ukIndiaWoman: {
-        Unit ukWoman = size.ukIndiaWoman;
-        newConversionResult = '${ukWoman.stringValue}';
-      }
-      break;
-      default: {
-        Unit eu = size.euChina;
-        newConversionResult = '${eu.stringValue}';
-      }
-      break;
+    if (amount == null) {
+      newConversionResult = "";
+    } else {
+      newConversionResult = widget.shoeSizeConverter.convert(fromSize, toSize, amount);
     }
     setState(() {
       conversionResult = newConversionResult;

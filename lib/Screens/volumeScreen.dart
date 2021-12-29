@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Models/volumeConverter.dart';
 import 'package:flutter_unit_converter/Widgets/resultCard.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/volume.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -9,6 +9,7 @@ class VolumeScreen extends StatefulWidget {
   VolumeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  final VolumeConverter volumeConverter = VolumeConverter();
   final List<VOLUME> volumes = [
     VOLUME.tablespoonsUs,
     VOLUME.cups,
@@ -49,53 +50,11 @@ class _VolumeScreenState extends State<VolumeScreen> {
   }
 
   void handleConversion() {
-    if (amount == null) {
-      setState(() {
-        conversionResult = "";
-      });
-    } else {
-      findGoalUnit();
-    }
-  }
-
-  double roundDouble(String value) => double.parse((double.parse(value)).toStringAsFixed(6));
-
-  void findGoalUnit() {
     String newConversionResult;
-    Volume volume = Volume(significantFigures: 8, removeTrailingZeros: true);
-    volume.convert(fromVolume, amount);
-
-    switch(toVolume) {
-      case VOLUME.tablespoonsUs: {
-        Unit tbsp = volume.tablespoonsUs;
-        newConversionResult = '${roundDouble(tbsp.stringValue!)} ${tbsp.symbol}';
-      }
-      break;
-      case VOLUME.cups: {
-        Unit cups = volume.cups;
-        newConversionResult = '${roundDouble(cups.stringValue!)} ${cups.symbol}';
-      }
-      break;
-      case VOLUME.usPints: {
-        Unit pints = volume.usPints;
-        newConversionResult = '${roundDouble(pints.stringValue!)} ${pints.symbol}';
-      }
-      break;
-      case VOLUME.usGallons: {
-        Unit gallons = volume.usGallons;
-        newConversionResult = '${roundDouble(gallons.stringValue!)} ${gallons.symbol}';
-      }
-      break;
-      case VOLUME.milliliters: {
-        Unit ml = volume.milliliters;
-        newConversionResult = '${roundDouble(ml.stringValue!)} ${ml.symbol}';
-      }
-      break;
-      default: {
-        Unit liters = volume.liters;
-        newConversionResult = '${roundDouble(liters.stringValue!)} ${liters.symbol}';
-      }
-      break;
+    if (amount == null) {
+      newConversionResult = "";
+    } else {
+      newConversionResult = widget.volumeConverter.convert(fromVolume, toVolume, amount);
     }
     setState(() {
       conversionResult = newConversionResult;

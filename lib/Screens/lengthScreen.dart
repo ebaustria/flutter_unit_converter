@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Models/lengthConverter.dart';
 import 'package:flutter_unit_converter/Widgets/resultCard.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/length.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -9,6 +9,7 @@ class LengthScreen extends StatefulWidget {
   LengthScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  final LengthConverter lengthConverter = LengthConverter();
   final List<LENGTH> lengths = [
     LENGTH.inches,
     LENGTH.feet,
@@ -51,71 +52,16 @@ class _LengthScreenState extends State<LengthScreen> {
     });
   }
 
-  void findGoalUnit() {
+  void handleConversion() {
     String newConversionResult;
-    Length length = Length(significantFigures: 8, removeTrailingZeros: true);
-    length.convert(fromLength, amount);
-
-    switch(toLength) {
-      case LENGTH.inches: {
-        Unit inches = length.inches;
-        newConversionResult = '${inches.stringValue} ${inches.symbol}';
-      }
-      break;
-      case LENGTH.feet: {
-        Unit ft = length.feet;
-        newConversionResult = '${ft.stringValue} ${ft.symbol}';
-      }
-      break;
-      case LENGTH.yards: {
-        Unit yd = length.yards;
-        newConversionResult = '${yd.stringValue} ${yd.symbol}';
-      }
-      break;
-      case LENGTH.miles: {
-        Unit miles = length.miles;
-        newConversionResult = '${miles.stringValue} ${miles.symbol}';
-      }
-      break;
-      case LENGTH.micrometers: {
-        Unit micrometers = length.micrometers;
-        newConversionResult = '${micrometers.stringValue} ${micrometers.symbol}';
-      }
-      break;
-      case LENGTH.millimeters: {
-        Unit mm = length.millimeters;
-        newConversionResult = '${mm.stringValue} ${mm.symbol}';
-      }
-      break;
-      case LENGTH.centimeters: {
-        Unit cm = length.centimeters;
-        newConversionResult = '${cm.stringValue} ${cm.symbol}';
-      }
-      break;
-      case LENGTH.meters: {
-        Unit m = length.meters;
-        newConversionResult = '${m.stringValue} ${m.symbol}';
-      }
-      break;
-      default: {
-        Unit km = length.kilometers;
-        newConversionResult = '${km.stringValue} ${km.symbol}';
-      }
-      break;
+    if (amount == null) {
+      newConversionResult = "";
+    } else {
+      newConversionResult = widget.lengthConverter.convert(fromLength, toLength, amount);
     }
     setState(() {
       conversionResult = newConversionResult;
     });
-  }
-
-  void handleConversion() {
-    if (amount == null) {
-      setState(() {
-        conversionResult = "";
-      });
-    } else {
-      findGoalUnit();
-    }
   }
 
   @override

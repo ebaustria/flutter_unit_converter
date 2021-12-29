@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Models/temperatureConverter.dart';
 import 'package:flutter_unit_converter/Widgets/resultCard.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/temperature.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -9,6 +9,7 @@ class TemperatureScreen extends StatefulWidget {
   TemperatureScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  final TemperatureConverter temperatureConverter = TemperatureConverter();
   final List<TEMPERATURE> temps = [TEMPERATURE.fahrenheit, TEMPERATURE.celsius];
 
   @override
@@ -46,22 +47,8 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   }
 
   void handleConversion() {
-    String newConversionResult;
-    Temperature temp = Temperature(significantFigures: 8, removeTrailingZeros: true);
-    temp.convert(fromTemp, amount);
-
-    if (amount == null) {
-      newConversionResult = "";
-    } else if (fromTemp == TEMPERATURE.fahrenheit) {
-      Unit c = temp.celsius;
-      newConversionResult = '${c.stringValue} ${c.symbol}';
-    } else {
-      Unit f = temp.fahrenheit;
-      newConversionResult = '${f.stringValue} ${f.symbol}';
-    }
-
     setState(() {
-      conversionResult = newConversionResult;
+      conversionResult = widget.temperatureConverter.convert(fromTemp, toTemp, amount);
     });
   }
 

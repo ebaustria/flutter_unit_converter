@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/Models/massConverter.dart';
 import 'package:flutter_unit_converter/Widgets/resultCard.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/mass.dart';
 
 import '../Widgets/conversionForm.dart';
@@ -9,6 +9,7 @@ class MassScreen extends StatefulWidget {
   MassScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  final MassConverter massConverter = MassConverter();
   final List<MASS> massUnits = [
     MASS.ounces,
     MASS.pounds,
@@ -50,56 +51,11 @@ class _MassScreenState extends State<MassScreen> {
   }
 
   void handleConversion() {
-    if (amount == null) {
-      setState(() {
-        conversionResult = "";
-      });
-    } else {
-      findGoalUnit();
-    }
-  }
-
-  void findGoalUnit() {
     String newConversionResult;
-    Mass mass = Mass(significantFigures: 8, removeTrailingZeros: true);
-    mass.convert(fromMass, amount);
-
-    switch(toMass) {
-      case MASS.ounces: {
-        Unit oz = mass.ounces;
-        newConversionResult = '${oz.stringValue} ${oz.symbol}';
-      }
-      break;
-      case MASS.pounds: {
-        Unit lbs = mass.pounds;
-        newConversionResult = '${lbs.stringValue} ${lbs.symbol}';
-      }
-      break;
-      case MASS.tons: {
-        Unit tons = mass.tons;
-        newConversionResult = '${tons.stringValue} ${tons.symbol}';
-      }
-      break;
-      case MASS.milligrams: {
-        Unit mg = mass.milligrams;
-        newConversionResult = '${mg.stringValue} ${mg.symbol}';
-      }
-      break;
-      case MASS.centigrams: {
-        Unit cg = mass.centigrams;
-        newConversionResult = '${cg.stringValue} ${cg.symbol}';
-      }
-      break;
-      case MASS.grams: {
-        Unit grams = mass.grams;
-        newConversionResult = '${grams.stringValue} ${grams.symbol}';
-      }
-      break;
-      default: {
-        Unit kg = mass.kilograms;
-        newConversionResult = '${kg.stringValue} ${kg.symbol}';
-      }
-      break;
+    if (amount == null) {
+      newConversionResult = "";
+    } else {
+      newConversionResult = widget.massConverter.convert(fromMass, toMass, amount);
     }
     setState(() {
       conversionResult = newConversionResult;
