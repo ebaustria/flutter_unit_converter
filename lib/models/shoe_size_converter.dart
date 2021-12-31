@@ -6,7 +6,7 @@ class ShoeSizeConverter extends UnitConverter {
   @override
   String convert(Object fromSize, Object toSize, double? amount) {
     String conversionResult;
-    ShoeSize size = ShoeSize(significantFigures: 8, removeTrailingZeros: true);
+    ShoeSize size = ShoeSize(significantFigures: 21, removeTrailingZeros: true);
     size.convert(fromSize as SHOE_SIZE, amount);
 
     switch(toSize) {

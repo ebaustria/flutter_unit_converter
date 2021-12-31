@@ -14,7 +14,7 @@ class ResultCard extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       child: SizedBox(
         width: 300,
-        height: 50,
+        height: 100,
         child: Center(
           child: Text(conversionResult, style: TextStyle(fontSize: 32)),
         ),

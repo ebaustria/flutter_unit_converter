@@ -6,7 +6,7 @@ class MassConverter extends UnitConverter {
   @override
   String convert(Object fromMass, Object toMass, double? amount) {
     String conversionResult;
-    Mass mass = Mass(significantFigures: 8, removeTrailingZeros: true);
+    Mass mass = Mass(significantFigures: 21, removeTrailingZeros: true);
     mass.convert(fromMass as MASS, amount);
 
     switch(toMass) {

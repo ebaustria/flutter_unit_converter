@@ -6,7 +6,7 @@ class VolumeConverter extends UnitConverter {
   @override
   String convert(fromVolume, toVolume, double? amount) {
     String conversionResult;
-    Volume volume = Volume(significantFigures: 8, removeTrailingZeros: true);
+    Volume volume = Volume(significantFigures: 21, removeTrailingZeros: true);
     volume.convert(fromVolume as VOLUME, amount);
 
     switch(toVolume) {

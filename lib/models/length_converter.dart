@@ -6,7 +6,7 @@ class LengthConverter extends UnitConverter {
   @override
   String convert(Object fromLength, Object toLength, double? amount) {
     String conversionResult;
-    Length length = Length(significantFigures: 8, removeTrailingZeros: true);
+    Length length = Length(significantFigures: 21, removeTrailingZeros: true);
     length.convert(fromLength as LENGTH, amount);
 
     switch(toLength) {

@@ -6,7 +6,7 @@ class TemperatureConverter extends UnitConverter {
   @override
   String convert(Object fromTemp, Object toTemp, double? amount) {
     String conversionResult;
-    Temperature temp = Temperature(significantFigures: 8, removeTrailingZeros: true);
+    Temperature temp = Temperature(significantFigures: 21, removeTrailingZeros: true);
     temp.convert(fromTemp as TEMPERATURE, amount);
 
     if (amount == null) {
