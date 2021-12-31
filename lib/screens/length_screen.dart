@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/Models/lengthConverter.dart';
-import 'package:flutter_unit_converter/Widgets/resultCard.dart';
+import 'package:flutter_unit_converter/models/length_converter.dart';
+import 'package:flutter_unit_converter/widgets/result_card.dart';
 import 'package:units_converter/properties/length.dart';
 
-import '../Widgets/conversionForm.dart';
+import '../Widgets/conversion_form.dart';
 
 class LengthScreen extends StatefulWidget {
   LengthScreen({Key? key, required this.title}) : super(key: key);

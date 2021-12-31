@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/Models/volumeConverter.dart';
-import 'package:flutter_unit_converter/Widgets/resultCard.dart';
+import 'package:flutter_unit_converter/models/volume_converter.dart';
+import 'package:flutter_unit_converter/widgets/result_card.dart';
 import 'package:units_converter/properties/volume.dart';
 
-import '../Widgets/conversionForm.dart';
+import '../widgets/conversion_form.dart';
 
 class VolumeScreen extends StatefulWidget {
   VolumeScreen({Key? key, required this.title}) : super(key: key);

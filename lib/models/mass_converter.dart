@@ -1,4 +1,4 @@
-import 'package:flutter_unit_converter/Models/unitConverter.dart';
+import 'package:flutter_unit_converter/models/unit_converter.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/properties/mass.dart';
 

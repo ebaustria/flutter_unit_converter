@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/Models/shoeSizeConverter.dart';
-import 'package:flutter_unit_converter/Widgets/resultCard.dart';
+import 'package:flutter_unit_converter/models/shoe_size_converter.dart';
+import 'package:flutter_unit_converter/widgets/result_card.dart';
 import 'package:units_converter/properties/shoe_size.dart';
 
-import '../Widgets/conversionForm.dart';
+import '../Widgets/conversion_form.dart';
 
 class ShoeSizeScreen extends StatefulWidget {
   ShoeSizeScreen({Key? key, required this.title}) : super(key: key);

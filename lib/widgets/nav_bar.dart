@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/Screens/shoeSizeScreen.dart';
-import 'package:flutter_unit_converter/Screens/volumeScreen.dart';
+import 'package:flutter_unit_converter/Screens/shoe_size_screen.dart';
+import 'package:flutter_unit_converter/Screens/volume_screen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../Screens/lengthScreen.dart';
-import '../Screens/massScreen.dart';
-import '../Screens/temperatureScreen.dart';
+import '../screens/length_screen.dart';
+import '../screens/mass_screen.dart';
+import '../screens/temperature_screen.dart';
 
 class NavBar extends StatefulWidget {
   NavBar({Key? key, required this.title, required this.onIndexChanged}) : super(key: key);

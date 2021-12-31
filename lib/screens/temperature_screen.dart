@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/Models/temperatureConverter.dart';
-import 'package:flutter_unit_converter/Widgets/resultCard.dart';
+import 'package:flutter_unit_converter/models/temperature_converter.dart';
+import 'package:flutter_unit_converter/widgets/result_card.dart';
 import 'package:units_converter/properties/temperature.dart';
 
-import '../Widgets/conversionForm.dart';
+import '../Widgets/conversion_form.dart';
 
 class TemperatureScreen extends StatefulWidget {
   TemperatureScreen({Key? key, required this.title}) : super(key: key);
