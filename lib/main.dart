@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unit_converter/screens/length_screen.dart';
+import 'package:flutter_unit_converter/screens/mass_screen.dart';
+import 'package:flutter_unit_converter/screens/shoe_size_screen.dart';
+import 'package:flutter_unit_converter/screens/temperature_screen.dart';
+import 'package:flutter_unit_converter/screens/volume_screen.dart';
 
 import 'widgets/nav_bar.dart';
 
@@ -14,18 +19,25 @@ class UnitConverterApp extends StatefulWidget {
 }
 
 class _UnitConverterAppState extends State<UnitConverterApp> {
-  int _selectedIndex = 0;
-  var _colors = [
+  int selectedIndex = 0;
+  var colors = [
     Colors.deepOrange,
     Colors.purple,
     Colors.green,
     Colors.indigo,
     Colors.pink,
   ];
+  var tabs = [
+    TemperatureScreen(title: 'Temperature',),
+    LengthScreen(title: 'Length & Distance'),
+    MassScreen(title: 'Mass'),
+    VolumeScreen(title: 'Volume'),
+    ShoeSizeScreen(title: 'Shoe Size'),
+  ];
 
-  void setTheme(int selectedIndex) {
+  void setIndex(int newIndex) {
     setState(() {
-      _selectedIndex = selectedIndex;
+      selectedIndex = newIndex;
     });
   }
 
@@ -38,8 +50,14 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Unit Converter',
-      theme: ThemeData(primarySwatch: _colors[_selectedIndex]),
-      home: NavBar(title: 'Unit Converter', onIndexChanged: setTheme),
+      theme: ThemeData(primarySwatch: colors[selectedIndex]),
+      home: Scaffold(
+        body: tabs[selectedIndex],
+        bottomNavigationBar: NavBar(
+          currentIndex: selectedIndex,
+          onIndexChanged: setIndex,
+        ),
+      ),
     );
   }
 }

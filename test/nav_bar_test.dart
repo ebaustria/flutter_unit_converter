@@ -8,7 +8,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: NavBar(title: 'Navigation Bar', onIndexChanged: (int index) => {}),
+        home: NavBar(currentIndex: 0, onIndexChanged: (int index) => {}),
       ),
     );
 
@@ -22,11 +22,11 @@ void main() {
 
   testWidgets('NavBar update index test', (WidgetTester tester) async {
 
-    late int mutatedIndex;
+    int mutatedIndex = 0;
 
     await tester.pumpWidget(
       MaterialApp(
-        home: NavBar(title: 'Navigation Bar', onIndexChanged: (int index) => {
+        home: NavBar(currentIndex: mutatedIndex, onIndexChanged: (int index) => {
           mutatedIndex = index
         }),
       ),

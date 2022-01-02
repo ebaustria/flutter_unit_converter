@@ -21,6 +21,4 @@ class ResultCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
