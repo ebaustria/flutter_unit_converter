@@ -72,20 +72,17 @@ class _MassScreenState extends State<MassScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Column(
-        children: <Widget>[
-          ConversionForm(
-            units: widget.massUnits,
-            getFromUnit: setFromMass,
-            getToUnit: setToMass,
-            onTextChanged: handleAmountChange,
-          ),
-          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          ResultCard(conversionResult: conversionResult),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        ConversionForm(
+          units: widget.massUnits,
+          getFromUnit: setFromMass,
+          getToUnit: setToMass,
+          onTextChanged: handleAmountChange,
+        ),
+        ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+        ResultCard(conversionResult: conversionResult),
+      ],
     );
   }
 }

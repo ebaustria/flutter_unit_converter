@@ -76,21 +76,18 @@ class _ShoeSizeScreenState extends State<ShoeSizeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          ConversionForm(
-            units: widget.sizes,
-            getFromUnit: setFromSize,
-            getToUnit: setToSize,
-            onTextChanged: handleAmountChange,
-          ),
-          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          ResultCard(conversionResult: conversionResult),
-        ]
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        ConversionForm(
+          units: widget.sizes,
+          getFromUnit: setFromSize,
+          getToUnit: setToSize,
+          onTextChanged: handleAmountChange,
+        ),
+        ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+        ResultCard(conversionResult: conversionResult),
+      ],
     );
   }
 }

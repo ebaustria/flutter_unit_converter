@@ -71,20 +71,17 @@ class _VolumeScreenState extends State<VolumeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Column(
-        children: <Widget>[
-          ConversionForm(
-            units: widget.volumes,
-            getFromUnit: setFromVolume,
-            getToUnit: setToVolume,
-            onTextChanged: handleAmountChange,
-          ),
-          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          ResultCard(conversionResult: conversionResult),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        ConversionForm(
+          units: widget.volumes,
+          getFromUnit: setFromVolume,
+          getToUnit: setToVolume,
+          onTextChanged: handleAmountChange,
+        ),
+        ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+        ResultCard(conversionResult: conversionResult),
+      ],
     );
   }
 }

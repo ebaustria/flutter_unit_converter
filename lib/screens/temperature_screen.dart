@@ -62,21 +62,18 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          ConversionForm(
-            units: widget.temps,
-            getFromUnit: setFromTemp,
-            getToUnit: setToTemp,
-            onTextChanged: handleAmountChange,
-          ),
-          ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
-          ResultCard(conversionResult: conversionResult),
-        ]
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        ConversionForm(
+          units: widget.temps,
+          getFromUnit: setFromTemp,
+          getToUnit: setToTemp,
+          onTextChanged: handleAmountChange,
+        ),
+        ElevatedButton(onPressed: handleConversion, child: Text("Convert")),
+        ResultCard(conversionResult: conversionResult),
+      ],
     );
   }
 }
