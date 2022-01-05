@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_unit_converter/widgets/dropdown_menu.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class ConversionForm extends StatefulWidget {
-  ConversionForm({
+class InputSection extends StatefulWidget {
+  InputSection({
     Key? key,
     required this.units,
     required this.getFromUnit,
@@ -18,10 +18,10 @@ class ConversionForm extends StatefulWidget {
   final Function(String?) onTextChanged;
 
   @override
-  _ConversionFormState createState() => _ConversionFormState();
+  _InputSectionState createState() => _InputSectionState();
 }
 
-class _ConversionFormState extends State<ConversionForm> {
+class _InputSectionState extends State<InputSection> {
   final GlobalKey<DropdownMenuState> _fromMenuState = GlobalKey<DropdownMenuState>();
   final GlobalKey<DropdownMenuState> _toMenuState = GlobalKey<DropdownMenuState>();
   late DropdownMenu from;
@@ -59,7 +59,6 @@ class _ConversionFormState extends State<ConversionForm> {
         if (isFrom) ...[
           Flexible(
             child: TextField(
-              focusNode: FocusNode(),
               keyboardType: TextInputType.number,
               onChanged: widget.onTextChanged,
             ),

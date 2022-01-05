@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_converter/screens/length_screen.dart';
-import 'package:flutter_unit_converter/screens/mass_screen.dart';
-import 'package:flutter_unit_converter/screens/shoe_size_screen.dart';
-import 'package:flutter_unit_converter/screens/temperature_screen.dart';
-import 'package:flutter_unit_converter/screens/volume_screen.dart';
+import 'package:flutter_unit_converter/models/length_converter.dart';
+import 'package:flutter_unit_converter/models/mass_converter.dart';
+import 'package:flutter_unit_converter/models/shoe_size_converter.dart';
+import 'package:flutter_unit_converter/models/temperature_converter.dart';
+import 'package:flutter_unit_converter/models/units.dart';
+import 'package:flutter_unit_converter/models/volume_converter.dart';
+import 'package:flutter_unit_converter/screens/conversion_screen.dart';
 import 'package:flutter_unit_converter/widgets/unit_tab_controller.dart';
 
 void main() {
@@ -13,12 +15,18 @@ void main() {
 class UnitConverterApp extends StatefulWidget {
   UnitConverterApp({Key? key}) : super(key: key);
 
+  static TemperatureUnits temperatureUnits = TemperatureUnits();
+  static LengthUnits lengthUnits = LengthUnits();
+  static MassUnits massUnits = MassUnits();
+  static VolumeUnits volumeUnits = VolumeUnits();
+  static ShoeSizeUnits shoeSizeUnits = ShoeSizeUnits();
+
   final List<Widget> tabs = [
-    TemperatureScreen(title: 'Temperature',),
-    LengthScreen(title: 'Length & Distance'),
-    MassScreen(title: 'Mass'),
-    VolumeScreen(title: 'Volume'),
-    ShoeSizeScreen(title: 'Shoe Size'),
+    ConversionScreen(converter: TemperatureConverter(), units: temperatureUnits.units),
+    ConversionScreen(converter: LengthConverter(), units: lengthUnits.units),
+    ConversionScreen(converter: MassConverter(), units: massUnits.units),
+    ConversionScreen(converter: VolumeConverter(), units: volumeUnits.units),
+    ConversionScreen(converter: ShoeSizeConverter(), units: shoeSizeUnits.units),
   ];
 
   @override
