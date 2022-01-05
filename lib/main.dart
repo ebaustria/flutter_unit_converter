@@ -4,7 +4,7 @@ import 'package:flutter_unit_converter/screens/mass_screen.dart';
 import 'package:flutter_unit_converter/screens/shoe_size_screen.dart';
 import 'package:flutter_unit_converter/screens/temperature_screen.dart';
 import 'package:flutter_unit_converter/screens/volume_screen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_unit_converter/widgets/unit_tab_controller.dart';
 
 void main() {
   runApp(UnitConverterApp());
@@ -45,35 +45,13 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
     return MaterialApp(
       title: 'Unit Converter',
       theme: ThemeData(primarySwatch: colors[selectedIndex]),
-      home: DefaultTabController(
-        length: 5,
-        child: Builder(builder: (BuildContext context) {
-          final TabController tabController = DefaultTabController.of(context)!;
-          tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              setState(() {
-                selectedIndex = tabController.index;
-              });
-            }
-          });
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Unit Converter'),
-              bottom: TabBar(
-                tabs: [
-                  Tab(icon: Icon(MdiIcons.thermometer)),
-                  Tab(icon: Icon(MdiIcons.ruler)),
-                  Tab(icon: Icon(MdiIcons.scale)),
-                  Tab(icon: Icon(MdiIcons.cupWater)),
-                  Tab(icon: Icon(MdiIcons.shoePrint)),
-                ],
-              ),
-            ),
-            body: TabBarView(
-              children: widget.tabs,
-            ),
-          );
-        }),
+      home: UnitTabController(
+        tabs: widget.tabs,
+        onTabChanged: (int newIndex) => {
+          setState(() {
+            selectedIndex = newIndex;
+          })
+        },
       ),
     );
   }
