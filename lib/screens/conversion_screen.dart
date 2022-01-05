@@ -7,7 +7,7 @@ class ConversionScreen extends StatefulWidget {
   ConversionScreen({Key? key, required this.converter, required this.units}) : super(key: key);
 
   final UnitConverter converter;
-  final List<Object> units;
+  final Map<String, Object> units;
 
   @override
   _ConversionScreenState createState() => _ConversionScreenState();
@@ -34,9 +34,7 @@ class _ConversionScreenState extends State<ConversionScreen> {
     } on FormatException {
       newDouble = 0;
     }
-    setState(() {
-      amount = newDouble;
-    });
+    amount = newDouble;
   }
 
   void handleConversion() {
@@ -54,8 +52,8 @@ class _ConversionScreenState extends State<ConversionScreen> {
   @override
   void initState() {
     super.initState();
-    fromUnit = widget.units.first;
-    toUnit = widget.units[1];
+    fromUnit = widget.units.values.first;
+    toUnit = widget.units.values.toList()[1];
   }
 
   @override

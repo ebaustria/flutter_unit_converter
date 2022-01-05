@@ -48,6 +48,6 @@ class Units {
     "UK men's": SHOE_SIZE.ukIndiaMan,
     "US women's": SHOE_SIZE.usaCanadaWoman,
     "UK women's": SHOE_SIZE.ukIndiaWoman,
-    "EU": SHOE_SIZE.euChina,
+    'EU': SHOE_SIZE.euChina,
   };
 }

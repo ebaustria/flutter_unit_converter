@@ -9,7 +9,7 @@ class DropdownMenu extends StatefulWidget {
     required this.initialUnit,
   }) : super(key: key);
 
-  final List<Object> units;
+  final Map<String, Object> units;
   final Function(Object?) getUnit;
   final Object initialUnit;
 
@@ -45,14 +45,13 @@ class DropdownMenuState extends State<DropdownMenu> {
         underline: SizedBox.shrink(),
         value: selectedUnit,
         onChanged: onUnitChanged,
-        // onTap: onButtonTap,
         icon: Icon(MdiIcons.chevronDown),
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        items: widget.units
-            .map<DropdownMenuItem<Object>>((Object value) {
+        items: widget.units.entries
+            .map<DropdownMenuItem<Object>>((MapEntry<String, Object> entry) {
           return DropdownMenuItem<Object>(
-            value: value,
-            child: Text(value.toString().split(".").last),
+            value: entry.value,
+            child: Text(entry.key),
           );
         }).toList(),
       )

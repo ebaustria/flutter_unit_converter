@@ -12,7 +12,7 @@ class InputSection extends StatefulWidget {
     required this.onTextChanged,
   }) : super(key: key);
 
-  final List<Object> units;
+  final Map<String, Object> units;
   final Function(Object?) getFromUnit;
   final Function(Object?) getToUnit;
   final Function(String?) onTextChanged;
@@ -41,13 +41,13 @@ class _InputSectionState extends State<InputSection> {
       key: _fromMenuState,
       units: widget.units,
       getUnit: widget.getFromUnit,
-      initialUnit: widget.units.first,
+      initialUnit: widget.units.values.first,
     );
     to = DropdownMenu(
       key: _toMenuState,
       units: widget.units,
       getUnit: widget.getToUnit,
-      initialUnit: widget.units[1],
+      initialUnit: widget.units.values.toList()[1],
     );
   }
 

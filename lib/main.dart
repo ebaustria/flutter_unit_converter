@@ -18,11 +18,14 @@ class UnitConverterApp extends StatefulWidget {
   static Units units = Units();
 
   final List<Widget> tabs = [
-    ConversionScreen(converter: TemperatureConverter(), units: units.temperatureUnits.values.toList()),
-    ConversionScreen(converter: LengthConverter(), units: units.lengthUnits.values.toList()),
-    ConversionScreen(converter: MassConverter(), units: units.massUnits.values.toList()),
-    ConversionScreen(converter: VolumeConverter(), units: units.volumeUnits.values.toList()),
-    ConversionScreen(converter: ShoeSizeConverter(), units: units.shoeSizeUnits.values.toList()),
+    ConversionScreen(
+      converter: TemperatureConverter(),
+      units: units.temperatureUnits
+    ),
+    ConversionScreen(converter: LengthConverter(), units: units.lengthUnits),
+    ConversionScreen(converter: MassConverter(), units: units.massUnits),
+    ConversionScreen(converter: VolumeConverter(), units: units.volumeUnits),
+    ConversionScreen(converter: ShoeSizeConverter(), units: units.shoeSizeUnits),
   ];
 
   @override
@@ -39,13 +42,16 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
     Colors.pink,
   ];
 
-  void onTabChanged(int newIndex) {
+  void closeKeyboard() {
     FocusScopeNode focus = FocusScope.of(context);
 
     if (!focus.hasPrimaryFocus) {
       focus.focusedChild?.unfocus();
     }
+  }
 
+  void onTabChanged(int newIndex) {
+    closeKeyboard();
     setState(() {
       selectedIndex = newIndex;
     });
@@ -58,12 +64,15 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Unit Converter',
-      theme: ThemeData(primarySwatch: colors[selectedIndex]),
-      home: UnitTabController(
-        tabs: widget.tabs,
-        onTabChanged: onTabChanged,
+    return GestureDetector(
+      onTap: closeKeyboard,
+      child: MaterialApp(
+        title: 'Unit Converter',
+        theme: ThemeData(primarySwatch: colors[selectedIndex]),
+        home: UnitTabController(
+          tabs: widget.tabs,
+          onTabChanged: onTabChanged,
+        ),
       ),
     );
   }

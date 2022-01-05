@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_unit_converter/models/units.dart';
 import 'package:flutter_unit_converter/widgets/dropdown_menu.dart';
 import 'package:units_converter/properties/length.dart';
 
 void main() {
 
-  final List<LENGTH> units = [
-    LENGTH.inches,
-    LENGTH.feet,
-    LENGTH.yards,
-    LENGTH.miles,
-    LENGTH.micrometers,
-    LENGTH.millimeters,
-    LENGTH.centimeters,
-    LENGTH.meters,
-    LENGTH.kilometers,
-  ];
+  final Map<String, LENGTH> units = Units().lengthUnits;
 
   GlobalKey<DropdownMenuState> menuState = GlobalKey<DropdownMenuState>();
 
@@ -28,7 +19,7 @@ void main() {
             key: menuState,
             getUnit: (Object? obj) => {},
             units: units,
-            initialUnit: units[0],
+            initialUnit: units.values.first,
           ),
         ),
       ),
