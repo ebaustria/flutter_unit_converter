@@ -4,55 +4,50 @@ import 'package:units_converter/properties/shoe_size.dart';
 import 'package:units_converter/properties/temperature.dart';
 import 'package:units_converter/properties/volume.dart';
 
-class TemperatureUnits {
-  final List<TEMPERATURE> units = [TEMPERATURE.fahrenheit, TEMPERATURE.celsius];
-}
+class Units {
+  final Map<String, TEMPERATURE> temperatureUnits = {
+    'fahrenheit': TEMPERATURE.fahrenheit,
+    'celsius': TEMPERATURE.celsius
+  };
 
-class MassUnits {
-  final List<MASS> units = [
-    MASS.ounces,
-    MASS.pounds,
-    MASS.tons,
-    MASS.milligrams,
-    MASS.centigrams,
-    MASS.grams,
-    MASS.kilograms,
-  ];
-}
+  final Map<String, MASS> massUnits = {
+    'ounces': MASS.ounces,
+    'pounds': MASS.pounds,
+    'milligrams': MASS.milligrams,
+    'centigrams': MASS.centigrams,
+    'grams': MASS.grams,
+    'kilograms': MASS.kilograms,
+    'metric tons': MASS.tons,
+  };
 
-class LengthUnits {
-  final List<LENGTH> units = [
-    LENGTH.inches,
-    LENGTH.feet,
-    LENGTH.yards,
-    LENGTH.miles,
-    LENGTH.micrometers,
-    LENGTH.millimeters,
-    LENGTH.centimeters,
-    LENGTH.meters,
-    LENGTH.kilometers,
-  ];
-}
+  final Map<String, LENGTH> lengthUnits = {
+    'inches': LENGTH.inches,
+    'feet': LENGTH.feet,
+    'yards': LENGTH.yards,
+    'miles': LENGTH.miles,
+    'micrometers': LENGTH.micrometers,
+    'millimeters': LENGTH.millimeters,
+    'centimeters': LENGTH.centimeters,
+    'meters': LENGTH.meters,
+    'kilometers': LENGTH.kilometers,
+  };
 
-class VolumeUnits {
-  final List<VOLUME> units = [
-    VOLUME.tablespoonsUs,
-    VOLUME.cups,
-    VOLUME.usPints,
-    VOLUME.usGallons,
-    VOLUME.milliliters,
-    VOLUME.liters,
-  ];
-}
+  final Map<String, VOLUME> volumeUnits = {
+    'tablespoons': VOLUME.tablespoonsUs,
+    'cups': VOLUME.cups,
+    'pints': VOLUME.usPints,
+    'gallons': VOLUME.usGallons,
+    'milliliters': VOLUME.milliliters,
+    'liters': VOLUME.liters,
+  };
 
-class ShoeSizeUnits {
-  final List<SHOE_SIZE> units = [
-    SHOE_SIZE.usaCanadaChild,
-    SHOE_SIZE.ukIndiaChild,
-    SHOE_SIZE.usaCanadaMan,
-    SHOE_SIZE.ukIndiaMan,
-    SHOE_SIZE.usaCanadaWoman,
-    SHOE_SIZE.ukIndiaWoman,
-    SHOE_SIZE.euChina,
-  ];
+  final Map<String, SHOE_SIZE> shoeSizeUnits = {
+    "US children's": SHOE_SIZE.usaCanadaChild,
+    "UK children's": SHOE_SIZE.ukIndiaChild,
+    "US men's": SHOE_SIZE.usaCanadaMan,
+    "UK men's": SHOE_SIZE.ukIndiaMan,
+    "US women's": SHOE_SIZE.usaCanadaWoman,
+    "UK women's": SHOE_SIZE.ukIndiaWoman,
+    "EU": SHOE_SIZE.euChina,
+  };
 }

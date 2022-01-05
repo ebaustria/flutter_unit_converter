@@ -15,18 +15,14 @@ void main() {
 class UnitConverterApp extends StatefulWidget {
   UnitConverterApp({Key? key}) : super(key: key);
 
-  static TemperatureUnits temperatureUnits = TemperatureUnits();
-  static LengthUnits lengthUnits = LengthUnits();
-  static MassUnits massUnits = MassUnits();
-  static VolumeUnits volumeUnits = VolumeUnits();
-  static ShoeSizeUnits shoeSizeUnits = ShoeSizeUnits();
+  static Units units = Units();
 
   final List<Widget> tabs = [
-    ConversionScreen(converter: TemperatureConverter(), units: temperatureUnits.units),
-    ConversionScreen(converter: LengthConverter(), units: lengthUnits.units),
-    ConversionScreen(converter: MassConverter(), units: massUnits.units),
-    ConversionScreen(converter: VolumeConverter(), units: volumeUnits.units),
-    ConversionScreen(converter: ShoeSizeConverter(), units: shoeSizeUnits.units),
+    ConversionScreen(converter: TemperatureConverter(), units: units.temperatureUnits.values.toList()),
+    ConversionScreen(converter: LengthConverter(), units: units.lengthUnits.values.toList()),
+    ConversionScreen(converter: MassConverter(), units: units.massUnits.values.toList()),
+    ConversionScreen(converter: VolumeConverter(), units: units.volumeUnits.values.toList()),
+    ConversionScreen(converter: ShoeSizeConverter(), units: units.shoeSizeUnits.values.toList()),
   ];
 
   @override
