@@ -59,6 +59,7 @@ class _ConversionFormState extends State<ConversionForm> {
         if (isFrom) ...[
           Flexible(
             child: TextField(
+              focusNode: FocusNode(),
               keyboardType: TextInputType.number,
               onChanged: widget.onTextChanged,
             ),

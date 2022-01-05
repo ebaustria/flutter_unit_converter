@@ -35,6 +35,18 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
     Colors.pink,
   ];
 
+  void onTabChanged(int newIndex) {
+    FocusScopeNode focus = FocusScope.of(context);
+
+    if (!focus.hasPrimaryFocus) {
+      focus.focusedChild?.unfocus();
+    }
+
+    setState(() {
+      selectedIndex = newIndex;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,11 +59,7 @@ class _UnitConverterAppState extends State<UnitConverterApp> {
       theme: ThemeData(primarySwatch: colors[selectedIndex]),
       home: UnitTabController(
         tabs: widget.tabs,
-        onTabChanged: (int newIndex) => {
-          setState(() {
-            selectedIndex = newIndex;
-          })
-        },
+        onTabChanged: onTabChanged,
       ),
     );
   }
